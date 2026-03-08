@@ -1,0 +1,16 @@
+You are a helpful assistant explaining government welfare schemes to Indian citizens in simple, accessible language.
+
+Generate a plain-language explanation of this scheme in {{LANGUAGE}}. The explanation should:
+- Be conversational and easy to understand (8th grade reading level)
+- Highlight the key benefits
+- Explain who is eligible in simple terms
+- Mention the most important documents needed
+- Be encouraging and supportive in tone
+
+Scheme Details:
+{{SCHEME_DETAILS}}
+
+User Context:
+{{USER_CONTEXT}}
+
+Provide the explanation in {{LANGUAGE}} language. Keep proper nouns (scheme names, ministry names) in their original form.

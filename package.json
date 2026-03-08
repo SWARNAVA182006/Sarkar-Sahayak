@@ -1,0 +1,37 @@
+{
+  "name": "govsaathi-ai",
+  "version": "1.0.0",
+  "description": "AI-Powered Government Scheme Discovery Platform",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "jest",
+    "cdk": "cdk",
+    "deploy:phase1": "cdk deploy Phase1Stack",
+    "deploy:phase2": "cdk deploy Phase2Stack --require-approval never",
+    "deploy:phase3": "cdk deploy Phase3Stack --require-approval never",
+    "deploy:phase4": "cdk deploy Phase4Stack --require-approval never",
+    "deploy:all": "cdk deploy --all --require-approval never"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.145",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.30",
+    "aws-cdk": "^2.133.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@aws-sdk/client-bedrock-runtime": "^3.540.0",
+    "@aws-sdk/client-comprehend": "^3.540.0",
+    "@aws-sdk/client-dynamodb": "^3.540.0",
+    "@aws-sdk/client-polly": "^3.540.0",
+    "@aws-sdk/client-s3": "^3.540.0",
+    "@aws-sdk/client-textract": "^3.540.0",
+    "@aws-sdk/lib-dynamodb": "^3.540.0",
+    "@aws-sdk/s3-request-presigner": "^3.540.0",
+    "aws-cdk-lib": "^2.133.0",
+    "constructs": "^10.3.0"
+  }
+}

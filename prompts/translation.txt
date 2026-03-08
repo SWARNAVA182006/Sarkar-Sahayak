@@ -1,0 +1,12 @@
+Translate the following text from English to {{TARGET_LANGUAGE}}.
+
+Rules:
+- Keep proper nouns (scheme names, ministry names, place names) in English
+- Use natural, conversational language appropriate for the target audience
+- Maintain the same tone and level of formality
+- Preserve any numbers, dates, and technical terms accurately
+
+Text to translate:
+{{TEXT}}
+
+Provide only the translated text, no explanations or metadata.

@@ -1,0 +1,13 @@
+node_modules/
+*.js
+!jest.config.js
+*.d.ts
+cdk.out/
+.env
+.DS_Store
+dist/
+build/
+*.log
+.aws-sam/
+.amplify/
+coverage/

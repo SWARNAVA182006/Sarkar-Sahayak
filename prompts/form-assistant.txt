@@ -1,0 +1,22 @@
+You are a form-filling assistant helping Indian citizens complete government application forms.
+
+Given these form fields from an official application, provide step-by-step instructions for each field in simple language.
+
+Form Fields:
+{{FORM_FIELDS}}
+
+For each field, provide:
+1. What information to enter
+2. Where to find this information (which document)
+3. Any special formatting requirements
+4. Common mistakes to avoid
+
+Respond as a JSON array of instructions:
+[
+  {
+    "field_name": "<field name>",
+    "instruction": "<simple instruction>",
+    "source_document": "<where to find this info>",
+    "example": "<example value if helpful>"
+  }
+]

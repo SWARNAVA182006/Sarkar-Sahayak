@@ -1,0 +1,112 @@
+.scheme-detail-container {
+  min-height: 100vh;
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+}
+
+.detail-header {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+}
+
+.scheme-content {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: var(--bg-primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.scheme-title h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin-bottom: 0.5rem;
+}
+
+.scheme-title .ministry {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+}
+
+.explanation-section {
+  background-color: var(--bg-secondary);
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.explanation-section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.explanation-text {
+  line-height: 1.6;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.btn-audio {
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.2s;
+}
+
+.btn-audio:hover:not(:disabled) {
+  background-color: #059669;
+}
+
+.btn-audio:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 2px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.section ul,
+.section ol {
+  padding-left: 1.5rem;
+}
+
+.section li {
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.section a {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .scheme-detail-container {
+    padding: 1rem;
+  }
+
+  .scheme-content {
+    padding: 1.5rem;
+  }
+
+  .scheme-title h1 {
+    font-size: 1.5rem;
+  }
+}
