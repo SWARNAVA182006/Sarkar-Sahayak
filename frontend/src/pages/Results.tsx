@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchAuthSession } from 'aws-amplify/auth';
-import axios from 'axios';
+// Temporarily commented out for local development
+// import { fetchAuthSession } from 'aws-amplify/auth';
+// import axios from 'axios';
 import '../styles/Results.css';
 
 interface Scheme {
@@ -25,7 +26,7 @@ function Results() {
 
   const searchSchemes = async () => {
     const query = sessionStorage.getItem('searchQuery');
-    const language = sessionStorage.getItem('selectedLanguage') || 'Hindi';
+    // const language = sessionStorage.getItem('selectedLanguage') || 'Hindi'; // Not used in demo
 
     if (!query) {
       navigate('/');
@@ -36,29 +37,38 @@ function Results() {
       setIsLoading(true);
       setError(null);
 
-      // Get auth token
-      const session = await fetchAuthSession();
-      const token = session.tokens?.idToken?.toString();
+      // Temporarily simulate API call for local development
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API delay
 
-      // Call Phase 2 semantic matching API
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.example.com/prod';
-      
-      const response = await axios.post(
-        `${apiUrl}/match`,
+      // Mock demo schemes data
+      const mockSchemes: Scheme[] = [
         {
-          query,
-          language,
-          use_cache: true,
+          scheme_id: 'pm-kisan',
+          scheme_name: 'PM-KISAN',
+          ministry: 'Ministry of Agriculture',
+          match_score: 95,
+          explanation: 'Direct income support scheme for farmers'
         },
         {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
+          scheme_id: 'ayushman-bharat',
+          scheme_name: 'Ayushman Bharat',
+          ministry: 'Ministry of Health',
+          match_score: 88,
+          explanation: 'Health insurance scheme for low-income families'
+        },
+        {
+          scheme_id: 'mudra-loan',
+          scheme_name: 'Mudra Loan Scheme',
+          ministry: 'Ministry of Finance',
+          match_score: 82,
+          explanation: 'Loan scheme for small businesses and entrepreneurs'
         }
-      );
+      ];
 
-      setSchemes(response.data.matched_schemes || []);
-    } catch (err: any) {
+      setSchemes(mockSchemes);
+    } catch (err) {
+      setError('Demo: Failed to load schemes (Backend not deployed yet)');
       console.error('Search error:', err);
-      setError(err.response?.data?.message || 'Failed to search schemes. Please try again.');
     } finally {
       setIsLoading(false);
     }

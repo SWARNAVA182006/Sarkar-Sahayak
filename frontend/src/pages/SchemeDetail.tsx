@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { fetchAuthSession } from 'aws-amplify/auth';
-import axios from 'axios';
+// Temporarily commented out for local development
+// import { fetchAuthSession } from 'aws-amplify/auth';
+// import axios from 'axios';
 import '../styles/SchemeDetail.css';
 
 interface SchemeData {
@@ -32,30 +33,104 @@ function SchemeDetail() {
   const loadSchemeDetails = async () => {
     try {
       setIsLoading(true);
-      
-      const session = await fetchAuthSession();
-      const token = session.tokens?.idToken?.toString();
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.example.com/prod';
-      const language = sessionStorage.getItem('selectedLanguage') || 'Hindi';
 
-      // Call Phase 3 explain API
-      const response = await axios.post(
-        `${apiUrl}/explain`,
-        {
-          scheme_id: schemeId,
-          language,
-          include_voice: true,
+      // Temporarily simulate API call for local development
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
+
+      // Mock scheme data based on schemeId
+      const mockSchemes: Record<string, SchemeData> = {
+        'pm-kisan': {
+          scheme_id: 'pm-kisan',
+          scheme_name: 'Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)',
+          ministry: 'Ministry of Agriculture & Farmers Welfare',
+          target_beneficiaries: ['Small and marginal farmers', 'Land-owning farmers'],
+          benefits: ['₹6,000 per year in three installments', 'Direct bank transfer', 'No processing fee'],
+          eligibility_criteria: [
+            'Must be a citizen of India',
+            'Must own cultivable land',
+            'Family income should not exceed ₹2 lakh per annum'
+          ],
+          application_steps: [
+            'Visit the official PM-KISAN website',
+            'Register with Aadhaar number',
+            'Verify land records',
+            'Submit application',
+            'Wait for verification and approval'
+          ],
+          documents_required: [
+            'Aadhaar Card',
+            'Bank Account Details',
+            'Land Records',
+            'Mobile Number'
+          ],
+          official_url: 'https://pmkisan.gov.in/'
         },
-        {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
+        'ayushman-bharat': {
+          scheme_id: 'ayushman-bharat',
+          scheme_name: 'Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (PMJAY)',
+          ministry: 'Ministry of Health & Family Welfare',
+          target_beneficiaries: ['Economically weaker sections', 'Low-income families'],
+          benefits: ['Up to ₹5 lakh per family per year', 'Cashless treatment', 'Coverage for 1,350+ procedures'],
+          eligibility_criteria: [
+            'Family income should not exceed ₹5 lakh per annum',
+            'Must have a valid Ayushman Bharat card',
+            'Priority given to rural and urban poor families'
+          ],
+          application_steps: [
+            'Check eligibility on official website',
+            'Apply through Common Service Centres (CSC)',
+            'Get Ayushman Bharat card',
+            'Visit empaneled hospital',
+            'Get cashless treatment'
+          ],
+          documents_required: [
+            'Aadhaar Card',
+            'Income Certificate',
+            'Ration Card',
+            'Bank Account Details'
+          ],
+          official_url: 'https://pmjay.gov.in/'
+        },
+        'mudra-loan': {
+          scheme_id: 'mudra-loan',
+          scheme_name: 'Pradhan Mantri Mudra Yojana (PMMY)',
+          ministry: 'Ministry of Finance',
+          target_beneficiaries: ['Small entrepreneurs', 'Self-employed individuals', 'Small business owners'],
+          benefits: ['Loans up to ₹10 lakh', 'No collateral required', 'Flexible repayment terms'],
+          eligibility_criteria: [
+            'Must be an Indian citizen',
+            'Age between 18-65 years',
+            'Should have a viable business plan'
+          ],
+          application_steps: [
+            'Approach nearest bank or financial institution',
+            'Submit business plan and documents',
+            'Get loan approval',
+            'Receive loan amount',
+            'Start your business'
+          ],
+          documents_required: [
+            'Aadhaar Card',
+            'PAN Card',
+            'Business Plan',
+            'Bank Account Details',
+            'Address Proof'
+          ],
+          official_url: 'https://www.mudra.org.in/'
         }
-      );
+      };
 
-      setScheme(response.data.scheme);
-      setExplanation(response.data.explanation);
-      setAudioUrl(response.data.voice?.audio_url || null);
-    } catch (err) {
-      console.error('Failed to load scheme details:', err);
+      const schemeData = mockSchemes[schemeId || ''] || mockSchemes['pm-kisan'];
+      setScheme(schemeData);
+
+      // Mock explanation
+      setExplanation(`This is a demo explanation for ${schemeData.scheme_name}. In the full application, this would be generated by AI based on your profile and the scheme details.`);
+
+      // Mock audio URL (would be generated by voice API)
+      setAudioUrl(null); // No audio in demo mode
+
+    } catch (error) {
+      console.error('Error loading scheme details:', error);
     } finally {
       setIsLoading(false);
     }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthenticator } from '@aws-amplify/ui-react';
+// Temporarily commented out for local development
+// import { useAuthenticator } from '@aws-amplify/ui-react';
 import '../styles/Home.css';
 
 const LANGUAGES = ['English', 'Hindi', 'Tamil', 'Telugu', 'Bengali', 'Marathi'];
@@ -10,8 +11,9 @@ function Home() {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const { user, signOut } = useAuthenticator((context) => [context.user]);
-
+  // Temporarily removed for local development
+  // const { user, signOut } = useAuthenticator((context) => [context.user]);
+  console.log('Home component rendering'); // Debug log
   const handleSearch = async () => {
     if (!query.trim()) {
       alert('Please enter your situation or requirements');
@@ -61,16 +63,13 @@ function Home() {
           <h1>🇮🇳 GovSaathi AI</h1>
           <p>सरकारी योजना खोजें</p>
         </div>
-        {user && (
-          <div className="user-menu">
-            <button onClick={() => navigate('/profile')} className="btn-secondary">
-              Profile
-            </button>
-            <button onClick={signOut} className="btn-secondary">
-              Sign Out
-            </button>
-          </div>
-        )}
+        {/* Temporarily showing demo mode instead of user menu */}
+        <div className="user-menu">
+          <span className="demo-badge">Demo Mode</span>
+          <button onClick={() => navigate('/profile')} className="btn-secondary">
+            Profile
+          </button>
+        </div>
       </header>
 
       <main className="main-content">

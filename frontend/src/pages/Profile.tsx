@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthenticator } from '@aws-amplify/ui-react';
-import { fetchAuthSession } from 'aws-amplify/auth';
-import axios from 'axios';
+// Temporarily commented out for local development
+// import { useAuthenticator } from '@aws-amplify/ui-react';
+// import { fetchAuthSession } from 'aws-amplify/auth';
+// import axios from 'axios';
 import '../styles/Profile.css';
 
 function Profile() {
@@ -10,7 +11,8 @@ function Profile() {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [extractedData, setExtractedData] = useState<any>(null);
   const navigate = useNavigate();
-  const { user, signOut } = useAuthenticator((context) => [context.user]);
+  // Temporarily removed for local development
+  // const { user, signOut } = useAuthenticator((context) => [context.user]);
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -25,53 +27,27 @@ function Profile() {
     try {
       setIsUploading(true);
 
-      // Get auth token
-      const session = await fetchAuthSession();
-      const token = session.tokens?.idToken?.toString();
-      const apiUrl = import.meta.env.VITE_API_URL || 'https://api.example.com/prod';
+      // Temporarily simulate file upload for local development
+      // In production, this would upload to S3 via the API
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate upload delay
 
-      // Get pre-signed upload URL
-      const uploadUrlResponse = await axios.post(
-        `${apiUrl}/upload`,
-        {
-          file_name: uploadedFile.name,
-          content_type: uploadedFile.type,
-          user_id: user?.username || 'anonymous',
-        },
-        {
-          headers: token ? { Authorization: `Bearer ${token}` } : {},
-        }
-      );
-
-      const { upload_url } = uploadUrlResponse.data;
-
-      // Upload file to S3
-      await axios.put(upload_url, uploadedFile, {
-        headers: {
-          'Content-Type': uploadedFile.type,
-        },
+      // Mock extracted data for demo
+      setExtractedData({
+        name: "Demo User",
+        age: 30,
+        income: "₹50,000/month",
+        location: "Mumbai, Maharashtra",
+        category: "General",
+        documents: ["Aadhaar Card", "PAN Card"]
       });
 
-      alert('Document uploaded successfully! Processing will take a few seconds.');
-      
-      // Wait for processing
-      setTimeout(() => {
-        checkExtractedData();
-      }, 5000);
-    } catch (err) {
-      console.error('Upload error:', err);
-      alert('Failed to upload document. Please try again.');
+      alert('Demo: File uploaded successfully! (Backend not deployed yet)');
+    } catch (error) {
+      console.error('Upload error:', error);
+      alert('Demo: Upload failed (Backend not deployed yet)');
     } finally {
       setIsUploading(false);
     }
-  };
-
-  const checkExtractedData = async () => {
-    // In a real app, you'd query DynamoDB or call an API
-    // For now, just show a success message
-    setExtractedData({
-      message: 'Document processed! Your profile has been updated.',
-    });
   };
 
   return (
@@ -86,8 +62,9 @@ function Profile() {
       <div className="profile-content">
         <div className="user-info">
           <h2>User Information</h2>
-          <p><strong>Email:</strong> {user?.signInDetails?.loginId || 'Not available'}</p>
-          <p><strong>User ID:</strong> {user?.username || 'Not available'}</p>
+          <p><strong>Email:</strong> demo@govsaathi.ai</p>
+          <p><strong>User ID:</strong> demo-user</p>
+          <p><strong>Status:</strong> Demo Mode (Backend not deployed)</p>
         </div>
 
         <div className="document-upload">
@@ -124,9 +101,7 @@ function Profile() {
         </div>
 
         <div className="actions">
-          <button onClick={signOut} className="btn-secondary">
-            Sign Out
-          </button>
+          <p className="demo-notice">Demo Mode: Authentication not required</p>
         </div>
       </div>
     </div>

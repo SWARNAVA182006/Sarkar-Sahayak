@@ -27,6 +27,16 @@
 .user-menu {
   display: flex;
   gap: 0.5rem;
+  align-items: center;
+}
+
+.demo-badge {
+  background-color: var(--warning-color);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
 }
 
 .main-content {
