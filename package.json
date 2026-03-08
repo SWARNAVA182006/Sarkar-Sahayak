@@ -14,7 +14,7 @@
     "deploy:all": "cdk deploy --all --require-approval never"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.145",
+    "@types/aws-lambda": "^8.10.161",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.11.30",
     "aws-cdk": "^2.133.0",
